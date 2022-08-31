@@ -35,8 +35,6 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static com.codestates.preproject.util.ApiDocumentUtils.getRequestPreProcessor;
-import static com.codestates.preproject.util.ApiDocumentUtils.getResponsePreProcessor;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -46,10 +44,14 @@ import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+
+
 @WebMvcTest(PostsController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
-public class PostsControllerRestDocsTest {
+public class PostsControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -65,25 +67,25 @@ public class PostsControllerRestDocsTest {
     @Test
     public void postPostsTest() throws Exception {
         // given
-        PostsDto.Post post = new PostsDto.Post("title1","contents");
+        PostsDto.Post post = new PostsDto.Post("title1","content1");
         String content = gson.toJson(post);
 
-        PostsDto.response responseDto =
-                new PostsDto.response(1L,
+        PostsDto.Response response =
+                new PostsDto.Response(1L,
                         "title1",
-                        "contents");
+                        "content1");
 
         // willReturn()이 최소한 null은 아니어야 한다.
         given(mapper.postsPostDtoToPosts(Mockito.any(PostsPostDto.class))).willReturn(new Posts());
 
         given(postsService.createPosts(Mockito.any(Posts.class))).willReturn(new Posts());
 
-        given(mapper.postsToPostsDtoResponse(Mockito.any(Posts.class))).willReturn(responseDto);
+        given(mapper.postsToPostsDtoResponse(Mockito.any(Posts.class))).willReturn(response);
 
         // when
         ResultActions actions =
                 mockMvc.perform(
-                        RestDocumentationRequestBuilders.post("/v1/posts/create")
+                        RestDocumentationRequestBuilders.post("/v1/posts")
                                 .accept(MediaType.APPLICATION_JSON)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(content)
@@ -95,9 +97,9 @@ public class PostsControllerRestDocsTest {
                 .andExpect(jsonPath("$.data.postId").value(1L))
                 .andExpect(jsonPath("$.data.title").value(post.getTitle()))
                 .andExpect(jsonPath("$.data.content").value(post.getContent()))
-                .andDo(document("post-posts",
+                .andDo(document("post-post",
                         preprocessRequest(prettyPrint()),
-//                      preprocessResponse(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         requestFields(
                                 List.of(
                                         fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
@@ -123,8 +125,8 @@ public class PostsControllerRestDocsTest {
         PostsDto.Patch patch = new PostsDto.Patch(postId, "title1", "content1");
         String content = gson.toJson(patch);
 
-        PostsDto.response responseDto =
-                new PostsDto.response(
+        PostsDto.Response responseDto =
+                new PostsDto.Response(
                         1L,
                         "title1",
                         "content1");
@@ -149,12 +151,12 @@ public class PostsControllerRestDocsTest {
         // then
         actions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.postId").value(1L))
+                .andExpect(jsonPath("$.data.postId").value(patch.getPostId()))
                 .andExpect(jsonPath("$.data.title").value(patch.getTitle()))
                 .andExpect(jsonPath("$.data.content").value(patch.getContent()))
-                .andDo(document("patch-posts",
+                .andDo(document("patch-post",
                         preprocessRequest(prettyPrint()),
-//                      preprocessResponse(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
                         pathParameters(
                                 parameterWithName("post-id").description("포스트 식별자")
                         ),
@@ -177,12 +179,12 @@ public class PostsControllerRestDocsTest {
     }
 
     @Test
-    void getPostTest() throws Exception {
+    public void getPostTest() throws Exception {
         // given
         long postsId = 1L;
-        PostsDto.response response = new PostsDto.response(1L,"title1", "contents");
+        PostsDto.Response response = new PostsDto.Response(1L,"title1", "contents");
 
-        given(postsService.findPost(Mockito.anyLong())).willReturn(new Posts());
+        given(postsService.findPosts(Mockito.anyLong())).willReturn(new Posts());
         given(mapper.postsToPostsDtoResponse(Mockito.any(Posts.class))).willReturn(response);
 
         // when
@@ -197,7 +199,7 @@ public class PostsControllerRestDocsTest {
                 .andExpect(jsonPath("$.data.title").value(response.getTitle()))
                 .andExpect(jsonPath("$.data.content").value(response.getContent()))
                 .andDo(
-                        document("get-posts",
+                        document("get-post",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 pathParameters(
@@ -215,7 +217,7 @@ public class PostsControllerRestDocsTest {
     }
 
     @Test
-    void getPostsTest() throws Exception {
+    public void getPostsTest() throws Exception {
         // given
         String page = "1";
         String size = "10";
@@ -224,18 +226,18 @@ public class PostsControllerRestDocsTest {
         queryParams.add("page", page);
         queryParams.add("size", size);
 
-        Posts member1 = new Posts(1L,"title1", "contents1");
-        Posts member2 = new Posts(2L,"title2", "contents2");
+        Posts post1 = new Posts(1L,"title1", "content1");
+        Posts post2 = new Posts(2L,"title2", "content2");
 
 
-        Page<Posts> postses = new PageImpl<>(List.of(member1, member2),
+        Page<Posts> posts = new PageImpl<>(List.of(post1, post2),
                 PageRequest.of(0, 10, Sort.by("postId").descending()), 2);
 
-        List<PostsDto.response> responses = getMultiResponseBody();
+        List<PostsDto.Response> responses = getMultiResponseBody();
 
 
-        given(postsService.findAllPosts(Mockito.anyInt(), Mockito.anyInt())).willReturn(postses);
-        given(mapper.postsToPostsDtoResponse(Mockito.any(Posts.class))).willReturn((PostsDto.response) responses);
+        given(postsService.findAllPosts(Mockito.anyInt(), Mockito.anyInt())).willReturn(posts);
+        given(mapper.postsToPostsDtoResponse(Mockito.any(Posts.class))).willReturn((PostsDto.Response) responses);
 
         // when
         ResultActions actions = mockMvc.perform(
@@ -244,12 +246,11 @@ public class PostsControllerRestDocsTest {
                         .accept(MediaType.APPLICATION_JSON));
 
         // then
-        MvcResult result =
-                actions
-                        .andExpect(status().isOk())
-                        .andDo(
+        MvcResult result = actions
+                                .andExpect(status().isOk())
+                                .andDo(
                                 document(
-                                        "gets-posts",
+                                        "get-posts",
                                         preprocessRequest(prettyPrint()),
                                         preprocessResponse(prettyPrint()),
                                         requestParameters(
@@ -258,7 +259,7 @@ public class PostsControllerRestDocsTest {
                                         responseFields(
                                                 Arrays.asList(
                                                         fieldWithPath("data").type(JsonFieldType.ARRAY).description("결과 데이터").optional(),
-                                                        fieldWithPath("data[].postsId").type(JsonFieldType.NUMBER).description("포스트 식별자 ID"),
+                                                        fieldWithPath("data[].postsId").type(JsonFieldType.NUMBER).description("포스트 식별자"),
                                                         fieldWithPath("data[].title").type(JsonFieldType.STRING).description("제목"),
                                                         fieldWithPath("data[].content").type(JsonFieldType.STRING).description("내용"),
                                                         fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보").optional(),
@@ -295,20 +296,20 @@ public class PostsControllerRestDocsTest {
         actions.andExpect(status().isNoContent())
                 .andDo(
                         document(
-                                "delete-Posts",
+                                "delete-post",
                                 preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()),
                                 pathParameters(
-                                        Arrays.asList(parameterWithName("posts-id").description("포스트 식별자 ID"))
+                                        Arrays.asList(parameterWithName("posts-id").description("포스트 식별자"))
                                 )
                         )
                 );
     }
 
-    public static List<PostsDto.response> getMultiResponseBody() {
+    public static List<PostsDto.Response> getMultiResponseBody() {
         return List.of(
-                new PostsDto.response(1L,"title1", "contents1"),
-                new PostsDto.response(2L,"title2", "contents2")
+                new PostsDto.Response(1L,"title1", "contents1"),
+                new PostsDto.Response(2L,"title2", "contents2")
         );
     }
 

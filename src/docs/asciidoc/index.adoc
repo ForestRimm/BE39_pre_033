@@ -1,4 +1,8 @@
-= Stackoverflow clone coding
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+
+= Stackoverflow
 :sectnums:
 :toc: left
 :toclevels: 4
@@ -15,30 +19,30 @@ v1.0.0, 2022.08.31
 
 
 .http-request
-include::{snippets}/post-posts/http-request.adoc[]
+include::{snippets}/post-post/http-request.adoc[]
 
 .request-fields
-include::{snippets}/post-posts/request-fields.adoc[]
+include::{snippets}/post-post/request-fields.adoc[]
 
 .http-response
-include::{snippets}/post-posts/http-response.adoc[]
+include::{snippets}/post-post/http-response.adoc[]
 
 .response-fields
-include::{snippets}/post-posts/response-fields.adoc[]
+include::{snippets}/post-post/response-fields.adoc[]
 
 === 포스트 수정
 
 .http-request
-include::{snippets}/patch-posts/http-request.adoc[]
+include::{snippets}/patch-post/http-request.adoc[]
 
 .request-fields
-include::{snippets}/patch-posts/request-fields.adoc[]
+include::{snippets}/patch-post/request-fields.adoc[]
 
 .http-response
-include::{snippets}/patch-posts/http-response.adoc[]
+include::{snippets}/patch-post/http-response.adoc[]
 
 .response-fields
-include::{snippets}/patch-posts/response-fields.adoc[]
+include::{snippets}/patch-post/response-fields.adoc[]
 
 === 특정 포스트 조회
 
@@ -57,26 +61,26 @@ include::{snippets}/get-posts/response-fields.adoc[]
 === 전체 포스트 조회
 
 .http-request
-include::{snippets}/gets-Posts/http-request.adoc[]
+include::{snippets}/get-posts/http-request.adoc[]
 
 .request-parameters
-include::{snippets}/gets-posts/request-parameters.adoc[]
+include::{snippets}/get-posts/path-parameters.adoc[]
 
 .http-response
-include::{snippets}/gets-posts/http-response.adoc[]
+include::{snippets}/get-posts/http-response.adoc[]
 
 .response-fields
-include::{snippets}/gets-posts/response-fields.adoc[]
+include::{snippets}/get-posts/response-fields.adoc[]
 
 === 특정 포스트 삭제
 
 .http-request
-include::{snippets}/delete-Posts/http-request.adoc[]
+include::{snippets}/delete-Post/http-request.adoc[]
 
 .path-parameters
-include::{snippets}/delete-Posts/path-parameters.adoc[]
+include::{snippets}/delete-Post/path-parameters.adoc[]
 
 .http-response
-include::{snippets}/delete-Posts/http-response.adoc[]
+include::{snippets}/delete-Post/http-response.adoc[]
 
 
