@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -33,41 +34,34 @@ public class PostsController {
      */
 
     @PostMapping
-    public ResponseEntity createPost(@RequestBody PostsPostDto postsPostDto) {
+    public ResponseEntity createPosts(@RequestBody PostsPostDto postsPostDto) {
 
-        Posts post = postsService.createPosts(mapper.postsPostDtoToPosts(postsPostDto));
+        Posts response = postsService.createPosts(mapper.postsPostDtoToPosts(postsPostDto));
 
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.postsToPostsDtoResponse(post)),
-                HttpStatus.CREATED);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.postsToPostsDtoResponse(response)), HttpStatus.CREATED);
     }
 
 
     @PatchMapping("/{post-id}")
-    public ResponseEntity patchPost(@PathVariable("post-id") long postId,
-                                    @RequestBody PostsPatchDto postsPatchDto) {
+    public ResponseEntity updatePosts(@PathVariable("post-id") @Positive Long postId,
+                                      @RequestBody PostsPatchDto postsPatchDto) {
+
 
         postsPatchDto.setPostId(postId);
-        Posts post = postsService.updatePosts(mapper.postsPatchDtoToPosts(postsPatchDto));
+        Posts posts = postsService.updatePosts(mapper.postsPatchDtoToPosts(postsPatchDto));
 
-       // post.setPostId(post.getPostId());
-        //Posts response = postsService.updatePosts(mapper.postsPatchDtoToPosts(post));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.postsToPostsDtoResponse(post)),
+                new SingleResponseDto<>(mapper.postsToPostsDtoResponse(posts)),
                 HttpStatus.OK);
     }
 
 
-    @GetMapping("/filter")
-    public ResponseEntity searchPosts(@RequestParam(value = "page", defaultValue = "1") int page,
-                                      @RequestParam(value = "size", defaultValue = "10") int size,
-                                      @RequestParam(value = "type", defaultValue = "1") long typeCriteria,
-                                      @RequestParam(value = "post-id", defaultValue = "1") long postId) {
+    @GetMapping("/{post-id}")
+    public ResponseEntity findPosts(@PathVariable("post-id") @Positive Long postId) {
 
 
-        Posts post = postsService.findPost(postId);
+        Posts post = postsService.findPosts(postId);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.postsToPostsDtoResponse(post)),
@@ -75,7 +69,7 @@ public class PostsController {
     }
 
     @GetMapping
-    public ResponseEntity getPosts( @RequestParam(value = "page", defaultValue = "1") int page,
+    public ResponseEntity findAllPosts( @RequestParam(value = "page", defaultValue = "1") int page,
                                     @RequestParam(value = "size", defaultValue = "10") int size) {
           Page<Posts> pagePosts = postsService.findAllPosts(page - 1, size);
           List<Posts> posts = pagePosts.getContent();
@@ -87,7 +81,7 @@ public class PostsController {
     }
 
     @DeleteMapping("/{post-id}")
-    public ResponseEntity deletePosts(@PathVariable("post-id") long postId) {
+    public ResponseEntity deletePosts(@PathVariable("post-id") @Positive Long postId) {
         postsService.deletePosts(postId);
 
         return new ResponseEntity<>("삭제 완료", HttpStatus.NO_CONTENT);

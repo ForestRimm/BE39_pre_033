@@ -26,7 +26,7 @@ public class PostsDto {
     public static class Patch {
 
         @Positive
-        private long postsId;
+        private long postId;
 
         @NotBlank(message = "제목은 공백이 아니어야 합니다.")
         private String title;
@@ -39,15 +39,15 @@ public class PostsDto {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class response {
+    public static class Response {
 
-        private long postsId;
+        private long postId;
         private String title;
         private String content;
 
-        public response(String title, String content) {
-            this.title = title;
-            this.content = content;
-        }
+   //     public response(String title, String content) {
+     //       this.title = title;
+       //     this.content = content;
+    //    }
     }
 }
