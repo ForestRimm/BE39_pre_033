@@ -49,7 +49,7 @@ public class PostsService {
     /**
      * 특정 글 조회
      */
-    public Posts findPost(long postId) {
+    public Posts findPosts(long postId) {
 
         return existPosts(postId);
     }

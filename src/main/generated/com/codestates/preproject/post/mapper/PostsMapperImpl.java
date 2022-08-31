@@ -43,12 +43,12 @@ public class PostsMapperImpl implements PostsMapper {
     }
 
     @Override
-    public PostsDto.response postsToPostsDtoResponse(Posts posts) {
+    public PostsDto.Response postsToPostsDtoResponse(Posts posts) {
         if ( posts == null ) {
             return null;
         }
 
-        PostsDto.response.responseBuilder response = PostsDto.response.builder();
+        PostsDto.Response.ResponseBuilder response = PostsDto.Response.builder();
 
         response.title( posts.getTitle() );
         response.content( posts.getContent() );
@@ -57,12 +57,12 @@ public class PostsMapperImpl implements PostsMapper {
     }
 
     @Override
-    public List<PostsDto.response> postsToPostsResponses(List<Posts> posts) {
+    public List<PostsDto.Response> postsToPostsResponses(List<Posts> posts) {
         if ( posts == null ) {
             return null;
         }
 
-        List<PostsDto.response> list = new ArrayList<PostsDto.response>( posts.size() );
+        List<PostsDto.Response> list = new ArrayList<PostsDto.Response>( posts.size() );
         for ( Posts posts1 : posts ) {
             list.add( postsToPostsDtoResponse( posts1 ) );
         }
