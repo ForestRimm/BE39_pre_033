@@ -2,7 +2,7 @@ package com.codestates.preproject.reply.entity;
 
 import com.codestates.preproject.audit.Auditable;
 import com.codestates.preproject.post.entity.Posts;
-import com.codestates.preproject.post.entity.Reply;
+import com.codestates.preproject.reply.entity.Reply;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

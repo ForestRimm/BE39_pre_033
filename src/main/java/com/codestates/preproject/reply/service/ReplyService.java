@@ -68,7 +68,7 @@ public class ReplyService {
 
 
     private void verifiedMember(Member member, Reply reply) {
-        if(!reply.getMember().getUsername().equals(member.getUsername()))
+\\\\        if(!reply.getMember().getName().equals(member.getName()))
             throw new BusinessLogicException(ExceptionCode.WRONG_MEMBERS_REPLY);
     }
 }

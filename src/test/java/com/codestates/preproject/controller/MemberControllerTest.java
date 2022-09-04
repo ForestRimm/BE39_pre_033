@@ -54,7 +54,7 @@ class MemberControllerTest {
         MemberDto.Post post = new MemberDto.Post("홍길동", "hgd@gmail.com", "password");
         String content = gson.toJson(post);
 
-        MemberDto.Response responseBody = new MemberDto.Response(1L, "hgd@gmail.com", "홍길동", "010-1111-2222");
+        MemberDto.Response responseBody = new MemberDto.Response();
 
         given(mapper.memberPostDtoToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
         given(memberService.saveMember(Mockito.any(Member.class))).willReturn(new Member());

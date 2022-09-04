@@ -29,7 +29,7 @@ public class MemberController {
     }
 
     // 추가
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity join(@Validated @RequestBody MemberDto.Post postMember) {
 
         Member member = (Member) mapper.memberPostDtoToMember(postMember);

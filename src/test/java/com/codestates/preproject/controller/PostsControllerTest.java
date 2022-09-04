@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -51,6 +52,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.requestP
 @WebMvcTest(PostsController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
+@SpringBootTest
 public class PostsControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -234,6 +236,7 @@ public class PostsControllerTest {
                 PageRequest.of(0, 10, Sort.by("postId").descending()), 2);
 
         List<PostsDto.Response> responses = getMultiResponseBody();
+
 
 
         given(postsService.findAllPosts(Mockito.anyInt(), Mockito.anyInt())).willReturn(posts);

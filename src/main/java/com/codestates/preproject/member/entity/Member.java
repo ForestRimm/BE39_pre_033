@@ -66,11 +66,11 @@ public class Member extends Auditable {
     }
 
 
-    public void setPosts(Posts posts) {
-        posts.add(posts);
-        if (posts.getMember() != this) {
-            posts.setMember(this);
-        }
+//    public void setPosts(Posts posts) {
+//        posts.add(posts);
+//        if (posts.getMember() != this) {
+//            posts.setMember(this);
+//        }
 
       //  public enum MemberStatus {
       //      MEMBER_ACTIVE("활동중"),
@@ -83,7 +83,7 @@ public class Member extends Auditable {
      //       MemberStatus(String status) {
      //           this.status = status;
      //       }
-        }
+  //      }
     }
 
 
