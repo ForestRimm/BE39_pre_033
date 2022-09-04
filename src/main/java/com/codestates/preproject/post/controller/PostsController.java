@@ -1,12 +1,12 @@
 package com.codestates.preproject.post.controller;
 
-import com.codestates.preproject.dto.MultiResponseDto;
 import com.codestates.preproject.post.dto.PostsPatchDto;
 import com.codestates.preproject.post.dto.PostsPostDto;
-import com.codestates.preproject.dto.SingleResponseDto;
 import com.codestates.preproject.post.entity.Posts;
 import com.codestates.preproject.post.mapper.PostsMapper;
 import com.codestates.preproject.post.service.PostsService;
+import com.codestates.preproject.dto.MultiResponseDto;
+import com.codestates.preproject.dto.SingleResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

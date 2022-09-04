@@ -1,7 +1,7 @@
-package com.codestates.preproject.post.dto;
+/*package com.codestates.preproject.reply.dto;
 
 public class PostsResponseDto {
-    private long postId;
+    private long postsId;
     private String title;
     private String content;
 
@@ -10,3 +10,4 @@ public class PostsResponseDto {
         this.content = content;
     }
 }
+*/

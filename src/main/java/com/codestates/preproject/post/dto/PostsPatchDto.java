@@ -4,14 +4,14 @@ import lombok.Getter;
 
 @Getter
 public class PostsPatchDto {
-        private long postsId;
+        private long postId;
 
         private String title;
 
         private String content;
 
-        public void setPostId(long postsId) {
-                this.postsId = postsId;
+        public void setPostId(long postId) {
+                this.postId = postId;
         }
 
 

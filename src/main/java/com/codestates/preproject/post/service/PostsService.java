@@ -58,7 +58,7 @@ public class PostsService {
      * 전체 글 조회
      */
     public Page<Posts> findAllPosts(int page, int size) {
-        return postsRepository.findAll(PageRequest.of(page,size, Sort.by("postsId").descending()));
+        return postsRepository.findAll(PageRequest.of(page,size, Sort.by("postId").descending()));
     }
 
 
@@ -76,9 +76,9 @@ public class PostsService {
     /**
      * PostId 존재하지 않을 경우 Exception
      */
-    private Posts existPosts(long postsId) {
+    private Posts existPosts(long postId) {
 
-        Optional<Posts> existPosts = postsRepository.findById(postsId);
+        Optional<Posts> existPosts = postsRepository.findById(postId);
 
         return existPosts.orElseThrow(() ->
                 new RuntimeException("PostId not exist"));
