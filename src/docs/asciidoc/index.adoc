@@ -47,16 +47,16 @@ include::{snippets}/patch-post/response-fields.adoc[]
 === 특정 포스트 조회
 
 .http-request
-include::{snippets}/get-posts/http-request.adoc[]
+include::{snippets}/get-post/http-request.adoc[]
 
 .path-parameters
-include::{snippets}/get-posts/path-parameters.adoc[]
+include::{snippets}/get-post/path-parameters.adoc[]
 
 .http-response
-include::{snippets}/get-posts/http-response.adoc[]
+include::{snippets}/get-post/http-response.adoc[]
 
 .response-fields
-include::{snippets}/get-posts/response-fields.adoc[]
+include::{snippets}/get-post/response-fields.adoc[]
 
 === 전체 포스트 조회
 
@@ -75,12 +75,12 @@ include::{snippets}/get-posts/response-fields.adoc[]
 === 특정 포스트 삭제
 
 .http-request
-include::{snippets}/delete-Post/http-request.adoc[]
+include::{snippets}/delete-post/http-request.adoc[]
 
 .path-parameters
-include::{snippets}/delete-Post/path-parameters.adoc[]
+include::{snippets}/delete-post/path-parameters.adoc[]
 
 .http-response
-include::{snippets}/delete-Post/http-response.adoc[]
+include::{snippets}/delete-post/http-response.adoc[]
 
 

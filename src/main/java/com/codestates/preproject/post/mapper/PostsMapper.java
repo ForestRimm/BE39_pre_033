@@ -2,7 +2,6 @@ package com.codestates.preproject.post.mapper;
 
 import com.codestates.preproject.post.dto.PostsDto;
 import com.codestates.preproject.post.dto.PostsPatchDto;
-import com.codestates.preproject.post.dto.PostsResponseDto;
 import com.codestates.preproject.post.dto.PostsPostDto;
 import com.codestates.preproject.post.entity.Posts;
 import org.mapstruct.Mapper;

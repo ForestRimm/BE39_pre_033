@@ -1,4 +1,4 @@
-package com.codestates.preproject;
+package com.codestates.preproject.controller;
 
 import com.codestates.preproject.post.controller.PostsController;
 import com.codestates.preproject.post.dto.PostsDto;

@@ -45,9 +45,9 @@ public class PostsDto {
         private String title;
         private String content;
 
-   //     public response(String title, String content) {
-     //       this.title = title;
-       //     this.content = content;
-    //    }
+ public Response(String title, String content) {
+   this.title = title;
+   this.content = content;
+      }
     }
 }
