@@ -1,1 +1,2 @@
-# BE39_pre_033
+# Stackoverflow clone coding (codestates pre-project)
+# java + spring
