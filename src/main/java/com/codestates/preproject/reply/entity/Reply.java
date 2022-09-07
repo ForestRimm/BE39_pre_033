@@ -1,11 +1,11 @@
 package com.codestates.preproject.reply.entity;
 
 import com.codestates.preproject.audit.Auditable;
+import com.codestates.preproject.member.entity.Member;
 import com.codestates.preproject.post.entity.Posts;
 import lombok.*;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Reply extends Auditable {
 
-    @Id
+    @Id //primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long replyId;
 
@@ -25,7 +25,7 @@ public class Reply extends Auditable {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = " postsId")
+    @JoinColumn(name = " postId")
     private Posts posts;
 
 

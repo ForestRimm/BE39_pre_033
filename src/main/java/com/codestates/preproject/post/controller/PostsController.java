@@ -33,7 +33,7 @@ public class PostsController {
      * 글 관리 ( 글 작성 / 글 수정 /특정 글 조회 / 전체 글 목록 / 글 삭제 )
      */
 
-    @PostMapping
+    @PostMapping //localhost:8080/v1/posts
     public ResponseEntity createPosts(@RequestBody PostsPostDto postsPostDto) {
 
         Posts response = postsService.createPosts(mapper.postsPostDtoToPosts(postsPostDto));

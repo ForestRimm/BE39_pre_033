@@ -23,7 +23,7 @@ configurations {
 
 dependencies {
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -31,11 +31,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'com.auth0:java-jwt:4.0.0'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	//testImplementation 'org.springframework.security:spring-security-test'
+	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	implementation 'com.google.code.gson:gson'
 }

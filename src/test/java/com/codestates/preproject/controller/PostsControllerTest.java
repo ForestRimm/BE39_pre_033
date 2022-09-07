@@ -1,5 +1,5 @@
 package com.codestates.preproject.controller;
-
+/*
 import com.codestates.preproject.post.controller.PostsController;
 import com.codestates.preproject.post.dto.PostsDto;
 import com.codestates.preproject.post.dto.PostsPatchDto;
@@ -25,6 +25,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.restdocs.request.ParameterDescriptor;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -48,7 +49,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 
-
+//@ContextConfiguration(classes = Posts.class)
 @WebMvcTest(PostsController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
@@ -323,3 +324,4 @@ public class PostsControllerTest {
         );
     }
 }
+*/

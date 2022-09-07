@@ -29,14 +29,14 @@ public class MemberController {
     }
 
     // 추가
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity join(@Validated @RequestBody MemberDto.Post postMember) {
 
-        Member member = (Member) mapper.memberPostDtoToMember(postMember);
+        Member member = mapper.memberPostDtoToMember(postMember);
         memberService.saveMember(member);
         return new ResponseEntity<>("회원 가입 완료", HttpStatus.OK);
     }
-/*
+
     @GetMapping("/user")
     public ResponseEntity user() {
         return new ResponseEntity<>("user 권한을 가지고 있습니다.", HttpStatus.OK);
@@ -57,15 +57,15 @@ public class MemberController {
 
         return new ResponseEntity<>("토큰이 존재하지 않습니다. ", HttpStatus.OK);
     }
-*/
+
 
     @GetMapping("/{member-id}")
-    public ResponseEntity findMember(@PathVariable("member-id") long memberId) {
+    public ResponseEntity lookMember(@PathVariable("member-id") long memberId) {
 
-        Member findMember = (Member) memberService.findMember(memberId);
+        Member lookMember = (Member) memberService.findMember(memberId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.memberToMemberResponseDto(findMember))
+                new SingleResponseDto<>(mapper.memberToMemberResponseDto(lookMember))
                 , HttpStatus.OK);
     }
 

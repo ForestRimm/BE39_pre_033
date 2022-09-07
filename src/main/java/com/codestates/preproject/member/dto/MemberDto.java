@@ -54,13 +54,9 @@ public class MemberDto {
         @NotBlank(message = "공백이 될 수 없습니다.")
         private long memberId;
         private String email;
-        private String name;
+        private String username;
         private String phone;
-        //private Member.MemberStatus memberStatus;
 
-        //public String getMemberStatus() {
-            //return memberStatus.getStatus();
-        //}
 
     }
 }

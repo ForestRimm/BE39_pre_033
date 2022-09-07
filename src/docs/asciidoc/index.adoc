@@ -17,6 +17,8 @@ v1.0.0, 2022.08.31
 == PostsController
 === 포스트 등록
 
+.curl-request
+include::{snippets}/post-post/curl-request.adoc[]
 
 .http-request
 include::{snippets}/post-post/http-request.adoc[]
@@ -31,12 +33,17 @@ include::{snippets}/post-post/http-response.adoc[]
 include::{snippets}/post-post/response-fields.adoc[]
 
 === 포스트 수정
+.curl-request
+include::{snippets}/patch-post/curl-request.adoc[]
 
 .http-request
 include::{snippets}/patch-post/http-request.adoc[]
 
 .request-fields
 include::{snippets}/patch-post/request-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-post/path-parameters.adoc[]
 
 .http-response
 include::{snippets}/patch-post/http-response.adoc[]
@@ -45,6 +52,9 @@ include::{snippets}/patch-post/http-response.adoc[]
 include::{snippets}/patch-post/response-fields.adoc[]
 
 === 특정 포스트 조회
+
+.curl-request
+include::{snippets}/get-post/curl-request.adoc[]
 
 .http-request
 include::{snippets}/get-post/http-request.adoc[]
@@ -60,6 +70,9 @@ include::{snippets}/get-post/response-fields.adoc[]
 
 === 전체 포스트 조회
 
+.curl-request
+include::{snippets}/get-posts/curl-request.adoc[]
+
 .http-request
 include::{snippets}/get-posts/http-request.adoc[]
 
@@ -74,6 +87,9 @@ include::{snippets}/get-posts/response-fields.adoc[]
 
 === 특정 포스트 삭제
 
+.curl-request
+include::{snippets}/delete-post/curl-request.adoc[]
+
 .http-request
 include::{snippets}/delete-post/http-request.adoc[]
 
@@ -83,4 +99,4 @@ include::{snippets}/delete-post/path-parameters.adoc[]
 .http-response
 include::{snippets}/delete-post/http-response.adoc[]
 
-
+image::https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg[spring]

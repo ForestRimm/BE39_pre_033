@@ -8,12 +8,8 @@ import com.codestates.preproject.post.repository.PostsRepository;
 import com.codestates.preproject.reply.entity.Reply;
 import com.codestates.preproject.reply.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -68,7 +64,7 @@ public class ReplyService {
 
 
     private void verifiedMember(Member member, Reply reply) {
-\\\\        if(!reply.getMember().getName().equals(member.getName()))
+        if(!reply.getMember().getUsername().equals(member.getUsername()))
             throw new BusinessLogicException(ExceptionCode.WRONG_MEMBERS_REPLY);
     }
 }

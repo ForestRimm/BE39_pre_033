@@ -40,8 +40,8 @@ public class MemberService {
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
-        Optional.ofNullable(member.getName())
-                .ifPresent(name -> findMember.setName(name));
+        Optional.ofNullable(member.getUsername())
+                .ifPresent(name -> findMember.setUsername(name));
         Optional.ofNullable(member.getPhone())
                 .ifPresent(phone -> findMember.setPhone(phone));
       //  Optional.ofNullable(member.getMemberStatus())
@@ -79,6 +79,6 @@ public class MemberService {
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())
-            throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
+            throw new BusinessLogicException(ExceptionCode.MEMBER_EXIST);
     }
 }

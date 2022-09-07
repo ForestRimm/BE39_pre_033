@@ -1,6 +1,7 @@
 package com.codestates.preproject.post.entity;
 
 import com.codestates.preproject.audit.Auditable;
+import com.codestates.preproject.member.entity.Member;
 import com.codestates.preproject.reply.entity.PostsReply;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +17,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Posts extends Auditable {
-    @Id
+    @Id //primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false) //DB 전략
     private long postId;
 
     @Column(name = "title", nullable = false)

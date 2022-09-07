@@ -1,7 +1,9 @@
 package com.codestates.preproject.reply.controller;
 
+import com.codestates.preproject.member.entity.Member;
 import com.codestates.preproject.dto.MultiResponseDto;
 import com.codestates.preproject.dto.SingleResponseDto;
+import com.codestates.preproject.post.entity.Posts;
 import com.codestates.preproject.reply.dto.ReplyDto;
 //import com.codestates.preproject.reply.dto.ReplyPatchDto;
 //import com.codestates.preproject.reply.dto.ReplyPostDto;
@@ -19,7 +21,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/v1/reply")
+@RequestMapping("/v1/posts/{postId}/reply")
 @RestController
 @Validated
 public class ReplyController {
@@ -27,13 +29,13 @@ public class ReplyController {
     private final ReplyService replyService;
     private final ReplyMapper mapper;
 
-    @PostMapping("/{postsId}")
-    public ResponseEntity createReply(@PathVariable("postsId") long postsId,
+    @PostMapping
+    public ResponseEntity createReply(@PathVariable("postId") long postId,
    //                                   @AuthenticationPrincipal PrincipalDetails principal,
                                       @RequestBody ReplyDto.Post replyPost) {
 
         Reply reply = mapper.ReplyPostDtoToReply(replyPost);
-        replyService.createReply(postsId, principal.getMember(), reply);
+        replyService.createReply(postId, reply.getMember(), reply);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.ReplyToReplyDtoResponse(reply)), HttpStatus.CREATED);
     }
@@ -45,7 +47,7 @@ public class ReplyController {
 
         Reply reply = mapper.ReplyPatchDtoToReply(replyPatch);
         reply.setReplyId(replyId);
-        Reply response = replyService.updateReply(principal.getMember(), reply);
+        Reply response = replyService.updateReply(reply.getMember(), reply);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.ReplyToReplyDtoResponse(response)), HttpStatus.OK);
     }
@@ -55,7 +57,7 @@ public class ReplyController {
      //                                  @AuthenticationPrincipal PrincipalDetails principal
                                                                          ) {
 
-        replyService.deleteReply(principal.getMember(), replyId);
+       // replyService.deleteReply(reply.getMember, replyId);
 
         return new ResponseEntity<>("댓글이 삭제되었습니다.", HttpStatus.NO_CONTENT);
     }
